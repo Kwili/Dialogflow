@@ -1,0 +1,25 @@
+{
+	"name": "dialogflow",
+	"version": "1.0.0",
+	"main": "index.ts",
+	"repository": "git@github.com:Kwili/Dialogflow.git",
+	"author": "Philippe <philippe.desousaviolante@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"start": "ts-node -r tsconfig-paths/register index.ts"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"eslint": "^6.8.0",
+		"express": "^4.17.1",
+		"morgan": "^1.9.1",
+		"ts-node": "^8.6.2",
+		"tsconfig-paths": "^3.9.0",
+		"typescript": "^3.8.3"
+	},
+	"devDependencies": {
+		"@types/eslint": "^6.1.8",
+		"@types/node": "^13.9.0",
+		"nodemon": "^2.0.2"
+	}
+}

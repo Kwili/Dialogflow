@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"watch": false,
+		"lib": [
+			"dom",
+			"es2017"
+		],
+		"outDir": "./build",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [
+				"./*"
+			]
+		},
+		"experimentalDecorators": true,
+		"pretty": true,
+		"emitDecoratorMetadata": true
+	},
+	"include": [
+		"./**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"**/*.spec.ts"
+	]
+}
