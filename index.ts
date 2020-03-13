@@ -2,6 +2,9 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as morgan from 'morgan';
+import PDF from 'pdf_handler';
+
+const pdf = new PDF();
 
 const app = express();
 
@@ -32,6 +35,16 @@ app.get('/reports/:id', (req, res) => {
 	const id = req.params.id;
 	//return res.sendFile(`/reports/${id}.pdf`, { root: __dirname });
 	return res.download(`${__dirname}/reports/${id}.pdf`);
+});
+
+app.post('/reports', (req, res) => {
+	pdf.create({
+		id: '1234', // conversationId
+		allergies: [], // liste des allergies
+		background: [], // fumeur...
+
+	});
+	return res.sendStatus(200);
 });
 
 /* app.use((err, req, res, next) => {
