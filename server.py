@@ -7,10 +7,10 @@ from pdf_handler import create_pdf
 
 env = os.getenv('PYTHON_ENV', 'dev')
 
-app = Flask('Forward')
-app.config['DEBUG'] = True if env == 'dev' else False
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+application = Flask('Forward')
+application.config['DEBUG'] = True if env == 'dev' else False
+cors = CORS(application)
+application.config['CORS_HEADERS'] = 'Content-Type'
 
 
 default_dir = './reports' if env == 'dev' else '/tmp/reports'
@@ -24,18 +24,18 @@ def ensure_path(path):
 ensure_path(default_dir)
 
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 @cross_origin()
 def home():
 	return 'You are on Forward\'s API'
 
-@app.route('/reports/<report_id>', methods=['GET'])
+@application.route('/reports/<report_id>', methods=['GET'])
 @cross_origin()
 def get_reports(report_id):
 	path = default_dir + report_id + '.pdf'
 	return send_file(path, as_attachment=True)
 
-@app.route('/reports/<report_id>', methods=['POST'])
+@application.route('/reports/<report_id>', methods=['POST'])
 @cross_origin()
 def post_report(report_id):
 	conversation_id = report_id # conversation_id
@@ -50,4 +50,4 @@ def post_report(report_id):
 	return 'Success'
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0', port='3030')
+	application.run(host='0.0.0.0', port='3030')
