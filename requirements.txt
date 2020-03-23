@@ -2,3 +2,4 @@ Flask==1.1.1
 Flask_API==1.1
 reportlab==3.5.34
 Flask_Cors==3.0.8
+gunicorn

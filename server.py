@@ -49,4 +49,5 @@ def post_report(report_id):
 	create_pdf(default_dir, conversation_id, diagnosis, allergies, background)
 	return 'Success'
 
-app.run(host='0.0.0.0', port='3030')
+if __name__ == "__main__":
+	app.run(host='0.0.0.0', port='3030')
