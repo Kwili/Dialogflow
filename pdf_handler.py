@@ -1,4 +1,6 @@
 
+# TODO: Fix [Empty Response] from Dialogflow
+
 import time
 from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import letter
@@ -16,8 +18,8 @@ def append_block(body, text, space_width=12):
 	body.append(Paragraph(text, styles["Normal"]))
 
 
-def create_pdf(conversation_id, diagnosis, allergies, background):
-	doc = SimpleDocTemplate('./reports/' + conversation_id + '.pdf', pagesize=letter,
+def create_pdf(default_dir, conversation_id, diagnosis, allergies, background):
+	doc = SimpleDocTemplate(default_dir + conversation_id + '.pdf', pagesize=letter,
                          rightMargin=72, leftMargin=72,
                          topMargin=72, bottomMargin=18)
 	body = []

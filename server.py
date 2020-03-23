@@ -1,14 +1,27 @@
 
+import os
 from flask import Flask, request, send_file
 from flask_cors import CORS, cross_origin
 from flask_api import status
 from pdf_handler import create_pdf
 
+env = os.getenv('PYTHON_ENV', 'dev')
 
 app = Flask('Forward')
-app.config['DEBUG'] = True
+app.config['DEBUG'] = True if env == 'dev' else False
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+default_dir = './reports' if env == 'dev' else '/tmp/reports'
+
+print(default_dir)
+
+def ensure_path(path):
+	if not os.path.exists(path):
+		os.makedirs(path)
+
+ensure_path(default_dir)
 
 
 @app.route('/', methods=['GET'])
@@ -19,7 +32,7 @@ def home():
 @app.route('/reports/<report_id>', methods=['GET'])
 @cross_origin()
 def get_reports(report_id):
-	path = './reports/' + report_id + '.pdf'
+	path = default_dir + report_id + '.pdf'
 	return send_file(path, as_attachment=True)
 
 @app.route('/reports/<report_id>', methods=['POST'])
@@ -33,7 +46,7 @@ def post_report(report_id):
 	} # Où se situe la douleur, niveau de douleur...
 	allergies = body['allergies']
 	background = body['background']
-	create_pdf(conversation_id, diagnosis, allergies, background)
+	create_pdf(default_dir, conversation_id, diagnosis, allergies, background)
 	return 'Success'
 
 app.run(host='0.0.0.0', port='3030')
