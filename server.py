@@ -13,7 +13,7 @@ cors = CORS(application)
 application.config['CORS_HEADERS'] = 'Content-Type'
 
 
-default_dir = './reports/' if env == 'dev' else '/tmp/reports'
+default_dir = './reports/' if env == 'dev' else '/tmp/reports/'
 
 print(default_dir)
 
@@ -39,7 +39,6 @@ def get_reports(report_id):
 @cross_origin()
 def download_report(report_id):
 	return send_from_directory(directory=default_dir, filename= report_id + '.pdf')
-
 @application.route('/reports/<report_id>', methods=['POST'])
 @cross_origin()
 def post_report(report_id):
