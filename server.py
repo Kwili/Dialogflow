@@ -23,7 +23,6 @@ def ensure_path(path):
 
 ensure_path(default_dir)
 
-
 @application.route('/', methods=['GET'])
 @cross_origin()
 def home():
@@ -33,12 +32,19 @@ def home():
 @cross_origin()
 def get_reports(report_id):
 	path = default_dir + report_id + '.pdf'
+	if not os.path.exists(path):
+		return 'File does not exist', 400
 	return send_file(path, as_attachment=True)
 
 @application.route('/reportsdl/<report_id>', methods=['GET'])
 @cross_origin()
 def download_report(report_id):
-	return send_from_directory(directory=default_dir, filename= report_id + '.pdf')
+	filename = report_id + '.pdf'
+	if not os.path.exists(default_dir + filename):
+		return 'File does not exist', 400
+	return send_from_directory(directory=default_dir, filename=filename)
+
+
 @application.route('/reports/<report_id>', methods=['POST'])
 @cross_origin()
 def post_report(report_id):
