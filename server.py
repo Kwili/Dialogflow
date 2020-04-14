@@ -1,6 +1,6 @@
 
 import os
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, send_from_directory
 from flask_cors import CORS, cross_origin
 from flask_api import status
 from pdf_handler import create_pdf
@@ -13,7 +13,7 @@ cors = CORS(application)
 application.config['CORS_HEADERS'] = 'Content-Type'
 
 
-default_dir = './reports' if env == 'dev' else '/tmp/reports'
+default_dir = './reports/' if env == 'dev' else '/tmp/reports'
 
 print(default_dir)
 
@@ -34,6 +34,11 @@ def home():
 def get_reports(report_id):
 	path = default_dir + report_id + '.pdf'
 	return send_file(path, as_attachment=True)
+
+@application.route('/reportsdl/<report_id>', methods=['GET'])
+@cross_origin()
+def download_report(report_id):
+	return send_from_directory(directory=default_dir, filename= report_id + '.pdf')
 
 @application.route('/reports/<report_id>', methods=['POST'])
 @cross_origin()
