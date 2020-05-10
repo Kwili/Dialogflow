@@ -31,7 +31,7 @@ ensure_path(default_dir)
 def home():
 	return 'You are on Forward\'s API'
 
-@application.route('/reports/<report_id>', methods=['GET'])
+@application.route('/reportsdl/<report_id>', methods=['GET'])
 @cross_origin()
 def get_reports(report_id):
 	path = default_dir + report_id + '.pdf'
@@ -39,7 +39,7 @@ def get_reports(report_id):
 		return 'File does not exist', 400
 	return send_file(path, as_attachment=True)
 
-@application.route('/reportsdl/<report_id>', methods=['GET'])
+@application.route('/reports/<report_id>', methods=['GET'])
 @cross_origin()
 def download_report(report_id):
 	filename = report_id + '.pdf'
