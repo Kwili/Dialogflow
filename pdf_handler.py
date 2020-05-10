@@ -34,14 +34,27 @@ def create_pdf(default_dir, conversation_id, diagnosis, allergies, background):
 	             diagnosis['pain'], 0)
 	append_block(body, '<font size="12">Partie du corps: %s</font>' %
 	             diagnosis['body_part'], 12)
+	append_block(body, '<font size="12">Taille: %s</font>' %
+	             diagnosis['height'], 12)
+	append_block(body, '<font size="12">Poids: %s</font>' %
+	             diagnosis['weight'], 12)
+	smoke = diagnosis['smoke']
+	if smoke > 0:
+		append_block(body, '<font size="12">Fumeur: %s</font>' %
+	            'Oui', 12)
+		append_block(body, '<font size="12">Nombre de cigarettes par jour: %s</font>' %
+	            smoke, 12)
+	else:
+		append_block(body, '<font size="12">Fumeur: %s</font>' %
+	            'Non', 12)
 	append_block(body, '<font size="12">Allergies:</font>', 12)
 	for a in allergies:
 		ptext = '<font size="12">- %s</font>' % a.strip()
 		append_block(body, ptext, 0)
 	append_block(body, '<font size="12">Antécédents:</font>', 12)
-	for b in background:
+	""" for b in background:
 		ptext = '<font size="12">- %s</font>' % b.strip()
-		append_block(body, ptext, 0)
+		append_block(body, ptext, 0) """
 	body.append(Spacer(1, 48))
 	append_block(body, '<font size="10">Made by Kwili</font>', 12)
 	doc.build(body)
