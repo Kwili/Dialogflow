@@ -1,0 +1,25 @@
+[
+	{ "name": "projects/kwili-chatbot-hlonvo/agent/sessions/f6654f1c-8c56-e033-881e-cac6c9684383/contexts/smoker-followup", "lifespanCount": 1, "parameters": { "smoke": 4, "smoke.original": "4", "height.original": "140cm", "weight": 140, "weight.original": "140", "allergies": ["Salade","tomate","oignon"
+			]
+		}
+	},
+	{ "name": "projects/kwili-chatbot-hlonvo/agent/sessions/f6654f1c-8c56-e033-881e-cac6c9684383/contexts/recap", "lifespanCount": 4, "parameters": { "allergies": ["Salade","tomate","oignon"
+			]
+		}
+	},
+	{ "name": "projects/kwili-chatbot-hlonvo/agent/sessions/f6654f1c-8c56-e033-881e-cac6c9684383/contexts/allergies-followup", "lifespanCount": 3, "parameters": { "height.original": "140cm", "weight": 140, "weight.original": "140", "allergies": ["Salade","tomate","oignon"
+			]
+		}
+	},
+	{ "name": "projects/kwili-chatbot-hlonvo/agent/sessions/f6654f1c-8c56-e033-881e-cac6c9684383/contexts/injury-followup", "parameters": { "bodypart": "jambes", "bodypart.original": "jambe", "damageValue": 4, "damageValue.original": "4", "smoke": 4, "smoke.original": "4", "height.original": "140cm", "weight": 140, "weight.original": "140", "allergies": ["Salade","tomate","oignon"
+			]
+		}
+	},
+	{ "name": "projects/kwili-chatbot-hlonvo/agent/sessions/f6654f1c-8c56-e033-881e-cac6c9684383/contexts/height", "lifespanCount": 2, "parameters": { "smoke": 4, "smoke.original": "4", "height.original": "140cm", "weight": 140, "weight.original": "140", "allergies": ["Salade","tomate","oignon"
+			]
+		}
+	},
+	{ "name": "projects/kwili-chatbot-hlonvo/agent/sessions/f6654f1c-8c56-e033-881e-cac6c9684383/contexts/__system_counters__", "parameters": { "no-input": 0, "no-match": 0
+		}
+	}
+]

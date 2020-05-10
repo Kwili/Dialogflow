@@ -5,6 +5,8 @@ from flask_cors import CORS, cross_origin
 from flask_api import status
 from pdf_handler import create_pdf
 
+import sys
+
 env = os.getenv('PYTHON_ENV', 'dev')
 
 application = Flask('Forward')
@@ -14,6 +16,7 @@ application.config['CORS_HEADERS'] = 'Content-Type'
 
 
 default_dir = './reports/' if env == 'dev' else '/tmp/reports/'
+default_url = 'http://localhost:3030/' if env == 'dev' else 'http://kwili-dialogflow.herokuapp.com/'
 
 print(default_dir)
 
@@ -45,19 +48,33 @@ def download_report(report_id):
 	return send_from_directory(directory=default_dir, filename=filename)
 
 
-@application.route('/reports/<report_id>', methods=['POST'])
+@application.route('/reports', methods=['POST'])
 @cross_origin()
-def post_report(report_id):
-	conversation_id = report_id # conversation_id
+def post_report():
 	body = request.get_json()
+	parameters = {}
+	session_id = ''
+	session_string = 'sessions/'
+	context_string = '/contexts/'
+	for attrs in body:
+		if "/injury-followup" in attrs['name']:
+			parameters = attrs['parameters']
+			name = attrs['name']
+			session_pos = name.find(session_string) + len(session_string)
+			tmp = name[session_pos:]
+			context_post = tmp.find(context_string)
+			session_id = tmp[:context_post]
 	diagnosis = {
-		'pain': body['pain'],
-		'body_part': body['body_part']
-	} # Où se situe la douleur, niveau de douleur...
-	allergies = body['allergies']
-	background = body['background']
-	create_pdf(default_dir, conversation_id, diagnosis, allergies, background)
-	return 'Success'
+		'pain': parameters['damageValue'],
+		'body_part': parameters['bodypart'],
+		'smoke': parameters['smoke'],
+		'height': parameters['height.original'],
+		'weight': parameters['weight.original']
+	}
+	allergies = parameters['allergies']
+	background = ['cancer', 'ebola', 'test']
+	create_pdf(default_dir, session_id, diagnosis, allergies, background)
+	return default_url + 'reports/' + session_id
 
 if __name__ == "__main__":
 	application.run(host='0.0.0.0', port='3030')
