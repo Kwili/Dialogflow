@@ -54,10 +54,11 @@ def create_pdf(default_dir, conversation_id, diagnosis, allergies, background):
 			append_block(body, ptext, 0)
 	else:
 		append_block(body, '<font size="12">Aucune allergies indiquée</font>', 12)
-	""" append_block(body, '<font size="12">Antécédents:</font>', 12)
-	for b in background:
-		ptext = '<font size="12">- %s</font>' % b.strip()
-		append_block(body, ptext, 0) """
+	if len(background) > 0:
+		append_block(body, '<font size="12">Antécédents:</font>', 12)
+		for b in background:
+			ptext = '<font size="12">- %s</font>' % b.strip()
+			append_block(body, ptext, 0)
 	body.append(Spacer(1, 48))
 	append_block(body, '<font size="10">Made by Kwili</font>', 12)
 	doc.build(body)
