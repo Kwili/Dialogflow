@@ -47,12 +47,15 @@ def create_pdf(default_dir, conversation_id, diagnosis, allergies, background):
 	else:
 		append_block(body, '<font size="12">Fumeur: %s</font>' %
 	            'Non', 12)
-	append_block(body, '<font size="12">Allergies:</font>', 12)
-	for a in allergies:
-		ptext = '<font size="12">- %s</font>' % a.strip()
-		append_block(body, ptext, 0)
-	append_block(body, '<font size="12">Antécédents:</font>', 12)
-	""" for b in background:
+	if len(allergies) > 0:
+		append_block(body, '<font size="12">Allergies:</font>', 12)
+		for a in allergies:
+			ptext = '<font size="12">- %s</font>' % a.strip()
+			append_block(body, ptext, 0)
+	else:
+		append_block(body, '<font size="12">Aucune allergies indiquée</font>', 12)
+	""" append_block(body, '<font size="12">Antécédents:</font>', 12)
+	for b in background:
 		ptext = '<font size="12">- %s</font>' % b.strip()
 		append_block(body, ptext, 0) """
 	body.append(Spacer(1, 48))

@@ -14,11 +14,8 @@ application.config['DEBUG'] = True if env == 'dev' else False
 cors = CORS(application)
 application.config['CORS_HEADERS'] = 'Content-Type'
 
-
 default_dir = './reports/' if env == 'dev' else '/tmp/reports/'
 default_url = 'http://localhost:3030/' if env == 'dev' else 'http://kwili-dialogflow.herokuapp.com/'
-
-print(default_dir)
 
 def ensure_path(path):
 	if not os.path.exists(path):
@@ -67,12 +64,13 @@ def post_report():
 	diagnosis = {
 		'pain': parameters['damageValue'],
 		'body_part': parameters['bodypart'],
-		'smoke': parameters['smoke'],
+		'smoke': 0 if 'smoke' not in parameters else parameters['smoke'],
 		'height': parameters['height.original'],
 		'weight': parameters['weight.original']
 	}
-	allergies = parameters['allergies']
-	background = ['cancer', 'ebola', 'test']
+	allergies = [] if 'allergies' not in parameters else parameters['allergies'][0].split(' ')
+	print(allergies[0])
+	background = []
 	create_pdf(default_dir, session_id, diagnosis, allergies, background)
 	return default_url + 'reports/' + session_id
 
