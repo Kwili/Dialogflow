@@ -1,5 +1,6 @@
 
 import os
+import uuid
 from flask import Flask, request, send_file, send_from_directory
 from flask_cors import CORS, cross_origin
 from flask_api import status
@@ -50,7 +51,7 @@ def download_report(report_id):
 def post_report():
 	body = request.get_json()
 	parameters = {}
-	session_id = ''
+	session_id = str(uuid.uuid1())
 	session_string = 'sessions/'
 	context_string = '/contexts/'
 	for attrs in body:
@@ -60,7 +61,7 @@ def post_report():
 			session_pos = name.find(session_string) + len(session_string)
 			tmp = name[session_pos:]
 			context_post = tmp.find(context_string)
-			session_id = tmp[:context_post]
+			#session_id = tmp[:context_post]
 	diagnosis = {
 		'pain': parameters['damageValue'],
 		'body_part': parameters['bodypart'],
