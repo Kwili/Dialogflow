@@ -67,7 +67,7 @@ def post_report():
 		'body_part': parameters['bodypart'],
 		'smoke': 0 if 'smoke' not in parameters else parameters['smoke'],
 		'height': parameters['height.original'],
-		'weight': parameters['weight.original']
+		'weight': parameters['weight.original'] + 'kg'
 	}
 	print('Parameters :', parameters)
 	allergies = [] if 'allergies' not in parameters else parameters['allergies']
