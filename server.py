@@ -68,8 +68,8 @@ def post_report():
 		'height': parameters['height.original'],
 		'weight': parameters['weight.original']
 	}
-	allergies = [] if 'allergies' not in parameters else parameters['allergies'][0].split(' ')
-	background = [] if 'background' not in parameters else parameters['background'][0].split(' ')
+	allergies = [] if 'allergies' not in parameters else parameters['allergies']
+	background = []# if 'background' not in parameters else parameters['background']
 	create_pdf(default_dir, session_id, diagnosis, allergies, background)
 	return default_url + 'reports/' + session_id
 

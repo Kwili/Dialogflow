@@ -53,7 +53,7 @@ def create_pdf(default_dir, conversation_id, diagnosis, allergies, background):
 			ptext = '<font size="12">- %s</font>' % a.strip()
 			append_block(body, ptext, 0)
 	else:
-		append_block(body, '<font size="12">Aucune allergies indiquée</font>', 12)
+		append_block(body, '<font size="12">Aucune allergie n\'a été indiquée</font>', 12)
 	if len(background) > 0:
 		append_block(body, '<font size="12">Antécédents:</font>', 12)
 		for b in background:
